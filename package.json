@@ -1,0 +1,32 @@
+{
+    "name": "hugonascimento",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "preview": "next build && next start",
+        "lint": "next lint",
+        "lint:fix": "next lint --fix",
+        "prettier-format": "prettier --write .",
+        "latest": "pnpm up --latest",
+        "pnpm-store-cache": "pnpm store prune"
+    },
+    "dependencies": {
+        "@emotion/react": "^11.11.3",
+        "@emotion/styled": "^11.11.0",
+        "@mui/icons-material": "^5.15.3",
+        "@mui/material": "^5.15.3",
+        "next": "14.0.4",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0"
+    },
+    "devDependencies": {
+        "eslint": "^8.56.0",
+        "eslint-config-next": "14.0.4",
+        "eslint-config-prettier": "^9.1.0",
+        "prettier": "3.1.1",
+        "typescript": "^5.3.3"
+    }
+}
