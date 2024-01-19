@@ -1,6 +1,5 @@
 'use client'
 // External libraries
-import { useEffect } from 'react'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
@@ -8,16 +7,11 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 // Internal libraries/utilities
 //
 // Components
-//
+import { Background } from '@/components/background'
 // Stylesheets
 //
 
 export default function GlobalError({ error }) {
-    useEffect(() => {
-        // Log the error to an error reporting service
-        console.error(error)
-    }, [error])
-
     return (
         <html>
             <body>
@@ -25,7 +19,7 @@ export default function GlobalError({ error }) {
                     display="flex"
                     justifyContent="center"
                     alignItems="center"
-                    height="80vh"
+                    height="100vh"
                 >
                     <Box>
                         <Typography variant="h6" align="center">
@@ -46,6 +40,7 @@ export default function GlobalError({ error }) {
                         </Box>
                     </Box>
                 </Box>
+                <Background />
             </body>
         </html>
     )

@@ -51,6 +51,38 @@ const theme = createTheme({
     typography: {
         fontFamily: roboto.style.fontFamily,
     },
+    components: {
+        MuiAppBar: {
+            styleOverrides: {
+                root: {
+                    backgroundImage: 'unset',
+                    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                },
+            },
+        },
+        MuiBackdrop: {
+            styleOverrides: {
+                root: {
+                    backgroundImage: 'unset',
+                    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                },
+            },
+        },
+        MuiButton: {
+            variants: [
+                {
+                    props: { variant: 'gradient' },
+                    style: {
+                        textTransform: 'none',
+                        padding: '12px 20px',
+                        color: '#a5a5a5',
+                        background:
+                            'linear-gradient(90deg,rgba(84, 29, 143, 0.3) 0%,rgba(84, 29, 143, 0.5) 25%, rgba(84, 29, 143, 0.8) 50%, rgba(84, 29, 143, 0.5) 75%, rgba(84, 29, 143, 0.3) 100%)',
+                    },
+                },
+            ],
+        },
+    }
 })
 
 export default theme
