@@ -11,23 +11,24 @@
         "lint:fix": "next lint --fix",
         "prettier-format": "prettier --write .",
         "latest": "pnpm up --latest",
+        "latest !eslint": "pnpm update '!eslint' --latest",
+        "pnpm-use-latest": "corepack use pnpm@latest",
         "pnpm-store-cache": "pnpm store prune"
     },
     "dependencies": {
         "@emotion/react": "^11.13.3",
-        "@emotion/styled": "^11.11.0",
-        "@mui/icons-material": "^5.15.5",
-        "@mui/material": "^5.15.5",
-        "next": "14.2.15",
+        "@emotion/styled": "^11.13.0",
+        "@mui/icons-material": "^6.1.6",
+        "@mui/material": "^6.1.6",
+        "next": "15.0.2",
         "react": "^18.3.1",
-        "react-dom": "^18.2.0"
+        "react-dom": "^18.3.1"
     },
     "devDependencies": {
         "eslint": "^8.56.0",
-        "eslint-config-next": "14.1.0",
+        "eslint-config-next": "15.0.2",
         "eslint-config-prettier": "^9.1.0",
-        "prettier": "3.3.3",
-        "typescript": "^5.6.3"
+        "prettier": "3.3.3"
     },
-    "packageManager": "pnpm@9.12.1+sha512.e5a7e52a4183a02d5931057f7a0dbff9d5e9ce3161e33fa68ae392125b79282a8a8a470a51dfc8a0ed86221442eb2fb57019b0990ed24fab519bf0e1bc5ccfc4"
+    "packageManager": "pnpm@9.12.3+sha512.cce0f9de9c5a7c95bef944169cc5dfe8741abfb145078c0d508b868056848a87c81e626246cb60967cbd7fd29a6c062ef73ff840d96b3c86c40ac92cf4a813ee"
 }
