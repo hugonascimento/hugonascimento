@@ -8,6 +8,9 @@ token = os.environ.get("GITHUB_TOKEN")
 g = Github(auth=Auth.Token(token))
 user = g.get_user()
 
+for repo in user.get_repos():
+    print(repo.name)
+
 langs = Counter()
 
 # Collect languages from all repositories
