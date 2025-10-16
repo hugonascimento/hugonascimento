@@ -3,11 +3,20 @@ import matplotlib.pyplot as plt
 from collections import Counter
 import os
 
-# GitHub Actions token or Personal Access Token
-token = os.environ.get("GITHUB_TOKEN")
+# GitHub Actions token
+# Usar PAT
+token = os.environ.get("MY_PAT")
 g = Github(auth=Auth.Token(token))
 user = g.get_user()
+print(user.login)
 
+# for testing purposes
+if token:
+    print("Token parcial:", token[:6])
+else:
+    print("Token não definido")
+
+# List all repositories
 for repo in user.get_repos():
     print(repo.name)
 
