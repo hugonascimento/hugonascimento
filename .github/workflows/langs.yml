@@ -9,28 +9,22 @@ on:
 jobs:
   generate-langs:
     runs-on: ubuntu-latest
-
     steps:
-      # 1 Checkout the repository
       - uses: actions/checkout@v3
 
-      # 2 Set up Python
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.11'
 
-      # 3 Install dependencies
       - name: Install dependencies
         run: pip install pygithub matplotlib
 
-      # 4 Generate LANGS.png
-      - name: Generate language stats
+      - name: Generate LANGS.png
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_GITHUB_TOKEN }}
         run: python scripts/generate_langs.py
 
-      # 5 Commit & Push LANGS.png
       - name: Commit & Push LANGS.png
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_GITHUB_TOKEN }}
