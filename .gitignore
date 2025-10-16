@@ -1,0 +1,8 @@
+# macOS system files
+.DS_Store
+
+# Virtual environments
+.env*
+
+# Python local stats
+/scripts/generate_langs_local.py
