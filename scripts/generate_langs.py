@@ -1,37 +1,37 @@
-from github import Github
+from github import Github, Auth
 import matplotlib.pyplot as plt
 from collections import Counter
 import os
 
-# Token do GitHub Actions ou Personal Access Token
+# GitHub Actions token or Personal Access Token
 token = os.environ.get("GITHUB_TOKEN")
-g = Github(token)
+g = Github(auth=Auth.Token(token))
 user = g.get_user()
 
 langs = Counter()
 
-# Coletar linguagens de todos os repositórios
+# Collect languages from all repositories
 for repo in user.get_repos():
     for lang, size in repo.get_languages().items():
         langs[lang] += size
 
-# Ordenar e pegar top 6 linguagens
+# Sort and take top 6 languages
 langs = dict(sorted(langs.items(), key=lambda x: x[1], reverse=True)[:6])
 total = sum(langs.values())
 
-# Cores aproximadas do estilo GitHub Insights
+# Approximate GitHub Insights style colors
 colors = ["#00B4AB", "#F0DB4F", "#8892BF", "#E34F26", "#F05340", "#A8B9CC"]
 
-# Criar gráfico horizontal
-plt.figure(figsize=(8,4))
-bars = plt.barh(list(langs.keys()), [v/total*100 for v in langs.values()], color=colors[:len(langs)])
+# Create horizontal bar chart
+plt.figure(figsize=(8, 4))
+bars = plt.barh(list(langs.keys()), [v / total * 100 for v in langs.values()], color=colors[:len(langs)])
 plt.xlim(0, 100)
-plt.gca().invert_yaxis()  # Barra maior em cima
+plt.gca().invert_yaxis()  # Largest bar on top
 
-# Adicionar porcentagens na barra
+# Add percentages on bars
 for bar, value in zip(bars, langs.values()):
     width = bar.get_width()
-    plt.text(width + 1, bar.get_y() + bar.get_height()/2, f"{width:.1f}%", va='center', fontsize=10)
+    plt.text(width + 1, bar.get_y() + bar.get_height() / 2, f"{width:.1f}%", va='center', fontsize=10)
 
 plt.xlabel("Percentage of total code")
 plt.title("Most Used Languages", fontsize=14)

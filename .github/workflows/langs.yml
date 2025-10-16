@@ -22,7 +22,7 @@ jobs:
 
       - name: Generate language stats
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PAT_GITHUB_TOKEN }}
         run: |
           python scripts/generate_langs.py
 
