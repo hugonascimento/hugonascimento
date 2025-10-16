@@ -9,12 +9,6 @@ g = Github(auth=Auth.Token(token))
 user = g.get_user()
 print(user.login)
 
-# for testing purposes
-if token:
-    print("Token parcial:", token[:6])
-else:
-    print("Token não definido")
-
 # Create assets directory
 os.makedirs("assets", exist_ok=True)
 
