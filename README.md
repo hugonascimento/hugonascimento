@@ -6,4 +6,4 @@
 
 ## 📊 GitHub Stats
 
-![Language Stats](LANGS.png)
+![Language Stats](assets/LANGS.png)
