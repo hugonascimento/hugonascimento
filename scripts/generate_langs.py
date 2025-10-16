@@ -4,7 +4,6 @@ from collections import Counter
 import os
 
 # GitHub Actions token
-# Usar PAT
 token = os.environ.get("MY_PAT")
 g = Github(auth=Auth.Token(token))
 user = g.get_user()
@@ -15,6 +14,9 @@ if token:
     print("Token parcial:", token[:6])
 else:
     print("Token não definido")
+
+# Create assets directory
+os.makedirs("assets", exist_ok=True)
 
 # List all repositories
 for repo in user.get_repos():
@@ -52,4 +54,4 @@ plt.gca().spines['right'].set_visible(False)
 plt.gca().spines['left'].set_visible(False)
 plt.gca().spines['bottom'].set_visible(False)
 plt.tight_layout()
-plt.savefig("LANGS.png", transparent=True)
+plt.savefig("assets/LANGS.png", transparent=True)
