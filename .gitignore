@@ -6,3 +6,5 @@
 
 # Python local stats
 /scripts/generate_langs_local.py
+/scripts/how_to.md
+assets/LANGS_old.png

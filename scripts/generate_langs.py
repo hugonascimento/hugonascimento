@@ -31,7 +31,8 @@ try:
             # print(f"Skipping organization repository {owner_login}: {repo.name}")
             continue
         for lang, size in repo.get_languages().items():
-            langs[lang] += size
+            if isinstance(size, int):
+                langs[lang] += size
         # print("repos:", repo.name)
 
     # Get the top 6 languages
