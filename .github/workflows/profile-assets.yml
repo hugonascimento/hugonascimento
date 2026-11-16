@@ -1,0 +1,61 @@
+name: Update Profile Assets
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - 'assets/**'
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  update-assets:
+    runs-on: ubuntu-latest
+    if: github.repository_owner == 'hugonascimento'
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          token: ${{ secrets.PAT_GITHUB_TOKEN }}
+
+      - name: Set up Python
+        if: github.event_name != 'schedule' || github.event.schedule == '0 0 * * 0'
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        if: github.event_name != 'schedule' || github.event.schedule == '0 0 * * 0'
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Generate language statistics
+        if: github.event_name != 'schedule' || github.event.schedule == '0 0 * * 0'
+        env:
+          MY_PAT: ${{ secrets.PAT_GITHUB_TOKEN }}
+        run: python scripts/generate_langs.py
+
+      - name: Generate contribution snake
+        uses: Platane/snk/svg-only@v3
+        with:
+          github_user_name: ${{ github.repository_owner }}
+          outputs: |
+            assets/snake.svg
+            assets/snake-dark.svg?palette=github-dark
+
+      - name: Commit generated assets
+        env:
+          MY_PAT: ${{ secrets.PAT_GITHUB_TOKEN }}
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "actions@github.com"
+          git add assets
+          if ! git diff --cached --quiet; then
+            git commit -m "Update profile assets"
+            git remote set-url origin https://x-access-token:${MY_PAT}@github.com/${{ github.repository }}.git
+            git push origin main
+          fi

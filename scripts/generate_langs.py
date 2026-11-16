@@ -206,7 +206,7 @@ for i, (lang, percentage) in enumerate(lang_percentages.items()):
 # Adjust layout to ensure nothing is clipped
 plt.subplots_adjust(left=0.0, right=1.0, top=1.0, bottom=0.0)
 
-output_path = "assets/LANGS.png"
+output_path = "assets/langs.png"
 plt.savefig(
     output_path,
     dpi=300,
