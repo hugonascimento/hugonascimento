@@ -1,3 +1,4 @@
+
 name: Update Profile Assets
 
 on:
@@ -5,36 +6,59 @@ on:
     branches: [main]
     paths-ignore:
       - 'assets/**'
+
   schedule:
     - cron: '0 0 * * *'
+
   workflow_dispatch:
 
 jobs:
   update-assets:
     runs-on: ubuntu-latest
+
     if: github.repository_owner == 'hugonascimento'
+
     permissions:
       contents: write
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
         with:
           token: ${{ secrets.PAT_GITHUB_TOKEN }}
 
+      # Daily at 00:00 UTC.
+      # Language statistics run only on Sundays.
+      - name: Check weekly schedule
+        id: schedule
+        shell: bash
+        run: |
+          if [ "${GITHUB_EVENT_NAME}" != "schedule" ] || [ "$(date -u +%u)" = "7" ]; then
+            echo "run_language_stats=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "run_language_stats=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Remove previous generated assets
+        run: |
+          rm -f assets/snake.svg
+          rm -f assets/snake-dark.svg
+          rm -f assets/langs.png
+
       - name: Set up Python
-        if: github.event_name != 'schedule' || github.event.schedule == '0 0 * * 0'
+        if: steps.schedule.outputs.run_language_stats == 'true'
         uses: actions/setup-python@v6
         with:
           python-version: '3.11'
 
       - name: Install dependencies
-        if: github.event_name != 'schedule' || github.event.schedule == '0 0 * * 0'
+        if: steps.schedule.outputs.run_language_stats == 'true'
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
       - name: Generate language statistics
-        if: github.event_name != 'schedule' || github.event.schedule == '0 0 * * 0'
+        if: steps.schedule.outputs.run_language_stats == 'true'
         env:
           MY_PAT: ${{ secrets.PAT_GITHUB_TOKEN }}
         run: python scripts/generate_langs.py
@@ -53,9 +77,13 @@ jobs:
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "actions@github.com"
-          git add assets
+
+          git add -A assets
+
           if ! git diff --cached --quiet; then
             git commit -m "Update profile assets"
+
             git remote set-url origin https://x-access-token:${MY_PAT}@github.com/${{ github.repository }}.git
+
             git push origin main
           fi
