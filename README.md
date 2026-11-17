@@ -1,5 +1,7 @@
 # Hi, I'm Hugo Nascimento 👋
 
+[Versão em PT-BR](./README.pt-BR.md)
+
 I'm a developer driven by curiosity and by the challenge of solving real
 problems. I enjoy understanding how systems work, designing clear
 architectures, and turning complex ideas into practical software.
@@ -34,7 +36,7 @@ validation, or sound engineering decisions.
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/snake-dark.svg" />
   <source media="(prefers-color-scheme: light)" srcset="assets/snake.svg" />
-  <img alt="The snake eats my contributions" src="assets/snake.svg" />
+  <img alt="My contributions" src="assets/snake.svg" />
 </picture>
 
 ## GitHub activity
