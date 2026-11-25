@@ -1,4 +1,4 @@
-# Hi, I'm Hugo Nascimento 👋
+# Hugo Nascimento 😎
 
 [Versão em PT-BR](./README.pt-BR.md)
 
