@@ -1,4 +1,4 @@
-# Olá, sou Hugo Nascimento 👋
+# Hugo Nascimento 😎
 
 Sou um desenvolvedor movido pela curiosidade e pelo desafio de resolver
 problemas reais. Gosto de entender como os sistemas funcionam, projetar
